@@ -1,0 +1,13 @@
+# Shared requirements for all Python services (rdf-store, ingestion-service, chatbot-server)
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.9.0
+pydantic-settings>=2.6.0
+python-dotenv>=1.0.0
+httpx>=0.27.0
+openai>=1.54.0
+python-multipart>=0.0.9
+pandas>=2.0.0
+openpyxl>=3.1.0
+pyarrow>=14.0.0
+pyoxigraph>=0.4.0  # RdfFormat enum + Store.load used for TTL ingestion
