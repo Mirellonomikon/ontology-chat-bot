@@ -24,9 +24,11 @@ def _env_bool(name: str, default: bool) -> bool:
     return raw.strip().lower() in ("1", "true", "yes", "on")
 
 
-EMBEDDING_BASE_URL: str = os.getenv("EMBEDDING_BASE_URL", "http://localhost:1234/v1").strip()
-EMBEDDING_API_KEY: str = os.getenv("EMBEDDING_API_KEY", "lm-studio").strip()
-EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "nomic-embed-text-v1.5").strip()
+EMBEDDING_BASE_URL: str = os.getenv(
+    "EMBEDDING_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/"
+).strip()
+EMBEDDING_API_KEY: str = os.getenv("EMBEDDING_API_KEY", "").strip()
+EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "gemini-embedding-001").strip()
 EMBED_MATCH_THRESHOLD: float = float(os.getenv("EMBED_MATCH_THRESHOLD", "0.7"))
 ENABLE_EMBEDDING_LINKING: bool = _env_bool("ENABLE_EMBEDDING_LINKING", True)
 

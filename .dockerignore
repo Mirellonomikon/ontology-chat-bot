@@ -1,0 +1,11 @@
+.git
+.idea
+**/.venv
+**/venv
+**/env
+**/__pycache__
+**/*.py[cod]
+**/.env
+**/*.db
+**/node_modules
+chatbot-ui/dist

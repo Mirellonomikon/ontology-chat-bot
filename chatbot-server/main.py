@@ -1,8 +1,10 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.config import get_settings, setup_logging
@@ -83,3 +85,11 @@ app.include_router(kg_router.router, prefix="/kg", tags=["kg"])
 @app.get("/health", tags=["health"], summary="Health check")
 async def health_check() -> dict:
     return {"status": "ok", "version": settings.app_version}
+
+
+# Serves the built chatbot-ui frontend (chatbot-ui/dist copied here at Docker
+# build time) same-origin. Registered last so it only catches paths no API
+# router above matched; absent in local dev, where the UI runs via Vite instead.
+_dist = Path(__file__).parent / "static"
+if _dist.is_dir():
+    app.mount("/", StaticFiles(directory=str(_dist), html=True), name="frontend")
